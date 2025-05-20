@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface DesignProject {
@@ -10,7 +10,7 @@ interface DesignProject {
   title: string;
   description: string;
   category: string;
-  image?: string;
+  images?: string[];
   video?: string;
   location: string;
 }
@@ -18,70 +18,102 @@ interface DesignProject {
 const designProjects: DesignProject[] = [
   {
     id: 1,
-    title: "Modern Kitchen Transformation",
-    description: "Complete kitchen remodel with custom cabinetry and quartz countertops.",
-    category: "Kitchen",
-    image: "/kitchen1.jpg",
-    location: "Nairobi"
+    title: "Mirrored Elegance",
+    description: "Bespoke mirror installations adding depth and luxury.",
+    category: "Mirror Design",
+    images: ["/mirror.jpg", "/mirror1.jpeg", "/mirror2.jpg", "/mirror3.jpg", "/mirror5.jpeg","/mirror4.jpg"],
+    location: "Kileleshwa"
   },
   {
     id: 2,
-    title: "Walk-In Wardrobe Design",
-    description: "Luxury wardrobe system with integrated lighting and glass displays.",
-    category: "Wardrobe",
-    image: "/wardrobe.jpg",
-    location: "Mombasa"
+    title: "3D Geometric Accent Wall",
+    description: "Striking accent wall design with molding for texture and visual impact.",
+    category: "Wall Design",
+    images: ["/wall.jpg", "/wall1.jpg", "/wall2.jpg"],
+    location: "Kitengela"
   },
   {
     id: 3,
-    title: "Outdoor Living Space",
-    description: "Landscaped patio with custom seating and ambient lighting.",
-    category: "Outdoor",
-    image: "/outdoor2.jpg",
-    location: "Karen"
+    title: "Ceiling & Lighting Experience",
+    description: "Modern gypsum ceiling with ambient recessed lighting and central chandelier.",
+    category: "Ceiling & Lighting",
+    images: ["/ceiling1.jpg", "/ceiling2.jpg", "/ceiling3.jpg"],
+    location: "Syokimau"
   },
   {
     id: 4,
-    title: "Statement Lighting Installation",
-    description: "Custom chandelier and accent lighting for grand foyer.",
-    category: "Lighting",
-    image: "/lighting.jpg",
-    location: "Runda"
-  },
-  {
-    id: 5,
-    title: "Elegant Dining Room",
-    description: "Contemporary dining area with bespoke furniture and ambient lighting.",
-    category: "Dining",
-    image: "/dining.jpg",
-    location: "Langata"
-  },
-  {
-    id: 6,
-    title: "Outdoor Wall Lighting",
-    description: "Decorative and functional wall lighting for outdoor spaces.",
-    category: "Lighting",
-    image: "/wall.jpg",
-    location: "Karen"
-  },
-  {
-    id: 7,
-    title: "Modern Bathroom Renovation",
-    description: "Sleek bathroom remodel with minimalist fixtures and marble finishes.",
-    category: "Bathroom",
-    image: "/bathroom.jpeg",
-    location: "Westlands"
-  },
-  {
-    id: 8,
-    title: "Cozy Bedroom Retreat",
-    description: "Warm and inviting bedroom design with custom storage solutions.",
-    category: "Bedroom",
-    image: "/bedroom.jpeg",
+    title: "Luxury Sitting Room Area",
+    description: "Contemporary living space with curated lighting and accent walls.",
+    category: "Living Room",
+    images: ["/living.jpg", "/sitting2.jpeg", "/sitting3.jpeg"],
     location: "Lavington"
   },
   {
+    id: 5,
+    title: "Modern Kitchen Transformation",
+    description: "Complete kitchen remodel with custom cabinetry and quartz countertops.",
+    category: "Kitchen",
+    images: ["/kitchen1.jpg"],
+    location: "Nairobi"
+  },
+  {
+    id: 6,
+    title: "Walk-In Wardrobe Design",
+    description: "Luxury wardrobe system with integrated lighting and glass displays.",
+    category: "Wardrobe",
+    images: ["/wardrobe.jpg"],
+    location: "Mombasa"
+  },
+  {
+    id: 7,
+    title: "Outdoor Living Space",
+    description: "Landscaped patio with custom seating and ambient lighting.",
+    category: "Outdoor",
+    images: ["/outdoor2.jpg"],
+    location: "Karen"
+  },
+  {
+    id: 8,
+    title: "Statement Lighting Installation",
+    description: "Custom chandelier and accent lighting for grand foyer.",
+    category: "Lighting",
+    images: ["/lighting.jpg"],
+    location: "Runda"
+  },
+  {
     id: 9,
+    title: "Elegant Dining Room",
+    description: "Contemporary dining area with bespoke furniture and ambient lighting.",
+    category: "Dining",
+    images: ["/dining.jpg"],
+    location: "Langata"
+  },
+  {
+    id: 10,
+    title: "Outdoor Wall Lighting",
+    description: "Decorative and functional wall lighting for outdoor spaces.",
+    category: "Lighting",
+    images: ["/wl.jpg"],
+    location: "Karen"
+  },
+  {
+    id: 11,
+    title: "Modern Bathroom Renovation",
+    description: "Sleek bathroom remodel with minimalist fixtures and marble finishes.",
+    category: "Bathroom",
+    images: ["/bathroom.jpeg"],
+    location: "Westlands"
+  },
+  {
+    id: 12,
+    title: "Cozy Bedroom Retreat",
+    description: "Warm and inviting bedroom design with custom storage solutions.",
+    category: "Bedroom",
+    images: ["/bedroom.jpeg"],
+    location: "Lavington"
+  },
+  {
+    id: 13,
     title: "Wardrobe Installation Process",
     description: "Step-by-step installation of a custom built-in wardrobe.",
     category: "Wardrobe",
@@ -89,16 +121,38 @@ const designProjects: DesignProject[] = [
     location: "Nakuru"
   },
   {
-    id: 10,
+    id: 14,
     title: "CNC Door Cutting",
     description: "Precision CNC cutting for custom decorative door panels.",
     category: "Workshop",
     video: "/cnc.mp4",
     location: "Industrial Area, Nairobi"
+  },
+  {
+    id: 15,
+    title: "Premium Flooring Finishes",
+    description: "Seamless vinyl, tile, and hardwood flooring solutions for modern interiors.",
+    category: "Flooring",
+    images: ["/floor.jpg", "/floor2.jpg", "/floor3.jpeg"],
+    location: "Thindigua"
   }
 ];
 
 const DesignProjectCard = ({ project }: { project: DesignProject }) => {
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const nextImage = () => {
+    if (project.images) {
+      setImageIndex((prev) => (prev + 1) % project.images.length);
+    }
+  };
+
+  const prevImage = () => {
+    if (project.images) {
+      setImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -118,11 +172,35 @@ const DesignProjectCard = ({ project }: { project: DesignProject }) => {
               className="w-full h-full object-cover"
             />
           ) : (
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-            />
+            <>
+              <img
+                src={project.images?.[imageIndex]}
+                alt={project.title}
+                className="w-full h-full object-cover transition-transform duration-500"
+              />
+              {project.images && project.images.length > 1 && (
+                <>
+                  <div className="absolute inset-y-0 left-2 flex items-center">
+                    <button
+                      onClick={prevImage}
+                      aria-label="Previous image"
+                      className="bg-white rounded-full p-1 shadow hover:bg-gray-200 transition"
+                    >
+                      <ChevronLeft className="h-5 w-5 text-black" />
+                    </button>
+                  </div>
+                  <div className="absolute inset-y-0 right-2 flex items-center">
+                    <button
+                      onClick={nextImage}
+                      aria-label="Next image"
+                      className="bg-white rounded-full p-1 shadow hover:bg-gray-200 transition"
+                    >
+                      <ChevronRight className="h-5 w-5 text-black" />
+                    </button>
+                  </div>
+                </>
+              )}
+            </>
           )}
           <div className="absolute bottom-0 left-0 bg-green-600 text-white text-xs px-3 py-1 rounded-tr-lg rounded-bl-lg">
             {project.category}

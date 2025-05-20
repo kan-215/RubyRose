@@ -12,8 +12,8 @@ const HeroSection = () => {
   useEffect(() => {
     if (currentIndex < welcomeText.length) {
       const timeout = setTimeout(() => {
-        setDisplayedWelcome(prev => prev + welcomeText[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
+        setDisplayedWelcome((prev) => prev + welcomeText[currentIndex]);
+        setCurrentIndex((prev) => prev + 1);
       }, 60);
       return () => clearTimeout(timeout);
     }
@@ -35,7 +35,11 @@ const HeroSection = () => {
                   <Sparkles className="text-red-600" size={24} />
                   <span className="text-lg md:text-xl font-semibold tracking-wide text-green-700 font-mono">
                     {displayedWelcome}
-                    <span className="animate-pulse text-black">|</span>
+                    {currentIndex === welcomeText.length ? (
+                      <span className="text-black"> | Interior Architects</span>
+                    ) : (
+                      <span className="animate-pulse text-black">|</span>
+                    )}
                   </span>
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">

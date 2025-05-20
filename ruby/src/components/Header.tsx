@@ -91,10 +91,11 @@ const Header = () => {
       >
         <div className="flex justify-between items-center p-4 border-b">
           <div className="flex items-center gap-2">
+            {/* Hide logo image on mobile, show only on md+ */}
             <img
               src="/logo.jpeg"
               alt="Logo"
-              className="h-8"
+              className="h-8 hidden md:inline"
             />
             <span className="text-lg font-bold bg-gradient-to-r from-red-600 via-green-600 to-black bg-clip-text text-transparent">
               RUBYROSE
