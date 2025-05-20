@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,7 +21,7 @@ const designProjects: DesignProject[] = [
     title: "Mirrored Elegance",
     description: "Bespoke mirror installations adding depth and luxury.",
     category: "Mirror Design",
-    images: ["/mirror.jpg", "/mirror1.jpeg", "/mirror2.jpg", "/mirror3.jpg", "/mirror5.jpeg","/mirror4.jpg"],
+    images: ["/mirror.jpg", "/mirror1.jpeg", "/mirror2.jpg", "/mirror3.jpg", "/mirror5.jpeg", "/mirror4.jpg"],
     location: "Kileleshwa"
   },
   {
@@ -53,7 +53,7 @@ const designProjects: DesignProject[] = [
     title: "Modern Kitchen Transformation",
     description: "Complete kitchen remodel with custom cabinetry and quartz countertops.",
     category: "Kitchen",
-    images: ["/kitchen1.jpg"],
+    images: ["/kitchen.jpg", "/kitchen1.jpeg", "/kitchen2.jpeg", "/kitchen3.jpeg"],
     location: "Nairobi"
   },
   {
@@ -61,7 +61,7 @@ const designProjects: DesignProject[] = [
     title: "Walk-In Wardrobe Design",
     description: "Luxury wardrobe system with integrated lighting and glass displays.",
     category: "Wardrobe",
-    images: ["/wardrobe.jpg"],
+    images: ["/wardrobe.jpg", "/wardrobe1.jpeg", "/wardrobe2.jpeg", "/wardrobe3.jpeg"],
     location: "Mombasa"
   },
   {
@@ -69,7 +69,7 @@ const designProjects: DesignProject[] = [
     title: "Outdoor Living Space",
     description: "Landscaped patio with custom seating and ambient lighting.",
     category: "Outdoor",
-    images: ["/outdoor2.jpg"],
+    images: ["/outdoor.jpg", "/outdoor1.jpeg", "/outdoor2.jpeg", "/outdoor3.jpeg"],
     location: "Karen"
   },
   {
@@ -77,7 +77,7 @@ const designProjects: DesignProject[] = [
     title: "Statement Lighting Installation",
     description: "Custom chandelier and accent lighting for grand foyer.",
     category: "Lighting",
-    images: ["/lighting.jpg"],
+    images: ["/lighting.jpg", "/lighting1.jpeg", "/lighting2.jpeg", "/lighting3.jpeg"],
     location: "Runda"
   },
   {
@@ -85,15 +85,15 @@ const designProjects: DesignProject[] = [
     title: "Elegant Dining Room",
     description: "Contemporary dining area with bespoke furniture and ambient lighting.",
     category: "Dining",
-    images: ["/dining.jpg"],
+    images: ["/dining.jpg", "/dining1.jpeg", "/dining2.jpeg", "/dining3.jpeg"],
     location: "Langata"
   },
   {
     id: 10,
-    title: "Outdoor Wall Lighting",
+    title: "Outdoor Lighting",
     description: "Decorative and functional wall lighting for outdoor spaces.",
     category: "Lighting",
-    images: ["/wl.jpg"],
+    images: ["/wl.jpg", "/wl1.jpeg", "/wl2.jpeg", "/outdoor.jpeg"],
     location: "Karen"
   },
   {
@@ -101,7 +101,7 @@ const designProjects: DesignProject[] = [
     title: "Modern Bathroom Renovation",
     description: "Sleek bathroom remodel with minimalist fixtures and marble finishes.",
     category: "Bathroom",
-    images: ["/bathroom.jpeg"],
+    images: ["/bathroom.jpeg", "/bathroom1.jpeg", "/bathroom2.jpeg", "/bathroom3.jpeg"],
     location: "Westlands"
   },
   {
@@ -109,7 +109,7 @@ const designProjects: DesignProject[] = [
     title: "Cozy Bedroom Retreat",
     description: "Warm and inviting bedroom design with custom storage solutions.",
     category: "Bedroom",
-    images: ["/bedroom.jpeg"],
+    images: ["/bedroom.jpeg", "/bedroom1.jpeg", "/bedroom2.jpeg", "/bedroom3.jpeg"],
     location: "Lavington"
   },
   {
@@ -153,6 +153,15 @@ const DesignProjectCard = ({ project }: { project: DesignProject }) => {
     }
   };
 
+  useEffect(() => {
+    if (project.images && project.images.length > 1) {
+      const interval = setInterval(() => {
+        nextImage();
+      }, 3000); // 3 seconds interval
+      return () => clearInterval(interval);
+    }
+  }, [project.images]);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -176,7 +185,7 @@ const DesignProjectCard = ({ project }: { project: DesignProject }) => {
               <img
                 src={project.images?.[imageIndex]}
                 alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-500"
+                className="w-full h-full object-cover transition-all duration-700 ease-in-out"
               />
               {project.images && project.images.length > 1 && (
                 <>
