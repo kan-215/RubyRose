@@ -39,9 +39,12 @@ const Header = () => {
               alt="RubyRose Ventures Logo"
               className="h-10 md:h-12"
             />
-            <span className="text-xl font-bold bg-gradient-to-r from-red-600 via-green-600 to-black bg-clip-text text-transparent">
-              RUBYROSE
-            </span>
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-bold bg-gradient-to-r from-red-600 via-green-600 to-black bg-clip-text text-transparent">
+                RUBYROSE
+              </span>
+              <span className="text-sm text-gray-600">Interior Architects</span>
+            </div>
           </a>
 
           {/* Desktop Navigation */}
@@ -90,16 +93,11 @@ const Header = () => {
         }`}
       >
         <div className="flex justify-between items-center p-4 border-b">
-          <div className="flex items-center gap-2">
-            {/* Hide logo image on mobile, show only on md+ */}
-            <img
-              src="/logo.jpeg"
-              alt="Logo"
-              className="h-8 hidden md:inline"
-            />
+          <div className="flex flex-col leading-tight">
             <span className="text-lg font-bold bg-gradient-to-r from-red-600 via-green-600 to-black bg-clip-text text-transparent">
               RUBYROSE
             </span>
+            <span className="text-xs text-gray-600">Interior Architects</span>
           </div>
           <button onClick={toggleMobileMenu}>
             <X size={24} className="text-gray-600" />
